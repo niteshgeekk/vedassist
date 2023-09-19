@@ -1,0 +1,118 @@
+{% extends "base.html"%}
+{% block title %} Analyser {% endblock %}
+{% block start %}
+<link rel="stylesheet" href="../static/shop.css">
+
+<img src="../static/images/Ayurvedic & Medicinal plants_2.jpg" alt="" class="bg121">
+<img src="../static/images/doc.png" alt="" class="lady">
+<div class="welcome" style="color: green; font-size: 20px; font-family: Georgia, 'Times New Roman', Times, serif; position: fixed;z-index: 999; background: transparent; margin-top: 75px; left: 10px;">
+    Welcome, {{ user.username }}
+</div>
+<div class="content">
+  <section class="content_data">
+      <form method="POST" action="{% url 'predict2' %}" class="d">
+          {% csrf_token %}
+          <h2 class="head_c">
+              Analyse Drug Effect
+          </h2>
+          <br>
+          <div class="opti">
+              <div class="opt">
+                  <label for="herbs" class="cold">Herbs:</label>
+                  <select name="herbs" class="cold_b">
+                      <option value=1 selected>Arjunarishta</option>
+                      <option value=2>Lemon Balm</option>
+                      <option value=3>Devadarvarishta</option>
+                      <option value=4>Neem</option>
+                      <option value=5>Gotu Kola</option>
+                      <option value=6>Kumaryasava</option>
+                      <option value=7>Takrarishta</option>
+                      <option value=8>Amritarishta</option>
+                      <option value=9>Pippalyasavam</option>
+                      <option value=10>Dhatryasava</option>
+                      <option value=11>Peppermint</option>
+                      <option value=12>Licorice</option>
+                      <option value=13>Bhringraj</option>
+                      <option value=14>Bhringrajasava</option>
+                      <option value=15>Mrigamadasava</option>
+                      <option value=16>Bilvasava</option>
+                      <option value=17>Khadirarishta</option>
+                      <option value=18>Dashamoola Jeerakam</option>
+                      <option value=19>Echinacea</option>
+                      <option value=20>Shatavari</option>
+                      <option value=21>Saraswatarishta</option>
+                      <option value=22>Lodhrasavam</option>
+                      <option value=23>Kushmandasava</option>
+                      <option value=24>Turmeric</option>
+                      <option value=25>Bilberry</option>
+                      <option value=26>Ginseng</option>
+                      <option value=27>Punarnavarishta</option>
+                  </select>
+              </div>
+              <div class="opt">
+                <label for="allopathic-drug" class="cold">Allopathic Drugs:</label>
+                <select name="allopathic_drug" class="cold_b">
+                    <option value=1 selected>Prednisone</option>
+                    <option value=2>Esomeprazole</option>
+                    <option value=3>Naproxen</option>
+                    <option value=4>Amlodipine</option>
+                    <option value=5>Ranitidine</option>
+                    <option value=6>Lisinopril</option>
+                    <option value=7>Paracetamol</option>
+                    <option value=8>Levothyroxine</option>
+                    <option value=9>Metformin</option>
+                    <option value=10>Metoprolol</option>
+                    <option value=11>Simvastatin</option>
+                    <option value=12>Atenolol</option>
+                    <option value=13>Loratadine</option>
+                    <option value=14>Fluoxetine</option>
+                    <option value=15>Cetirizine</option>
+                    <option value=16>Atorvastatin</option>
+                    <option value=17>Aspirin</option>
+                    <option value=18>Diclofenac</option>
+                    <option value=19>Omeprazole</option>
+                    <option value=20>Warfarin</option>
+                    <option value=21>Amoxicillin</option>
+                </select>
+              </div>
+            </div>
+            <div class="opti">
+                <div class="opt">
+                    <label for="age" class="cold">Age:</label>
+                    <input type="number" class="cold_b" name="age">
+                </div>
+                <div class="opt">
+                    <label for="gender" class="cold">Gender:</label>
+                    <select class="cold_b" name="gender">
+                        <option value=3>Male</option>
+                        <option value=4>Female</option>
+                    </select>
+                </div>
+            </div>
+            <div class="opti">
+                <div class="opt">
+                    <label for="weight" class="cold">Weight:</label>
+                    <input type="number" class="cold_b" name="weight">
+                </div>
+                <div class="opt">
+                    <label for="doses" class="cold">Dosage (mg) :</label>
+                    <input type="number" class="cold_b" name="doses">
+                </div>
+            </div>
+            <div class="opti">
+                <div class="opt">
+                    <label for="duration" class="cold">Duration :</label>
+                    <input type="number" class="cold_b" name="duration">
+                </div>
+            </div>
+          
+                <center><button class="btn1" type="submit">Predict</button></center>
+            
+        </form>
+  </section>
+  
+</div>
+  
+  
+  
+  {% endblock %}

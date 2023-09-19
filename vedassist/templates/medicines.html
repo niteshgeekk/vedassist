@@ -1,0 +1,100 @@
+{% extends "base.html"%}
+{% block title %} Medicine {% endblock %}
+{% block start %}
+<link rel="stylesheet" href="../static/shop.css">
+<h4 class="wel"> Welcome
+{{request.user}}
+</h4>
+<div class = "container mt-5"> 
+    <form class= "col-6 mx-auto card p-3 shadow.lg" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <h2> Add Medicine </h2>
+      <hr>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Medicine Name</label>
+          <input name="medicine_name"  required type="text" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Medicine Price</label>
+          <input name="medicine_price"  required type="number" class="form-control">
+        </div>
+
+        <div class="mb-6">
+          <label for="exampleInputPassword1" class="form-label">Medicine Decription</label>
+          <textarea class="form-control" name="medicine_description" required> </textarea>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Medicine Image</label>
+          <input name ="medicine_image" required type="file" class="form-control">
+        </div>
+
+        <button type="submit" class="btn3" style="font-size: 11px;">Add Medicine</button>
+    </form>
+    <div class="mt-5">
+      <div class="mx-auto col-6">
+
+        <form> 
+          <div class="mb-3"
+            <label for="exampleInputEmail1" class="form-label">Search Medicine</label>
+            <input name="search" type="text" class="form-control">
+          </div>
+          <br>
+          <button type="submit" class="btn4">Search</button>
+
+        </form>
+      
+    </div>
+
+<hr>
+<br>
+<div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+      <a href="?page=1"><button class="pre">&laquo;</button></a>
+      <a href="?page={{ page_obj.previous_page_number }}"><button class="pre">←</button></a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}"><button class="pre">→</button></a>
+      <a href="?page={{ page_obj.paginator.num_pages }}"><button class="pre">&raquo;</button></a>
+    {% endif %}
+  </span>
+</div>
+      <div class="card2">
+        {% for medicine in medicines %}
+        <div class="card_con2">
+          <center><img src ="/media/{{medicine.medicine_image}}" style="height : 100px; margin-bottom: 5px;" ></center>
+          <h3>{{medicine.medicine_name}}</h3>
+          <p class="text" id="text{{medicine.id}}">{{medicine.medicine_description | slice:"1:100"}}<span class="moretext">{{medicine.medicine_description | slice:"100:"}}</span></p>
+          <p class="readmore" id="readmore{{medicine.id}}" onclick="expand({{medicine.id}})">Read More</p>
+          <p>
+            ₹{{ medicine.medicine_price }}
+          </p>
+           <p>
+            <a href ="/delete-medicine/{{medicine.id}}/"><button class ="btn5">Delete</button></a> 
+           </p>
+        </div>
+
+
+        {% endfor %}
+    </div>
+    <script>
+      function expand(id){
+        document.querySelector(`#text${id}`).classList.toggle('show_more');
+        if(document.querySelector(`#readmore${id}`).innerHTML === 'Read More'){
+        document.querySelector(`#readmore${id}`).innerHTML = 'Read Less';
+        }else{
+          document.querySelector(`#readmore${id}`).innerHTML = 'Read More';
+        }
+      }
+    </script>
+
+</div>
+
+</div>
+    
+{% endblock %}

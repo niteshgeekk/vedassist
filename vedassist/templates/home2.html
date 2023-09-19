@@ -1,0 +1,29 @@
+{% extends "base.html"%}
+{% block title %} Home {% endblock %}
+{% block start %}
+<link rel="stylesheet" type="text/css" href="../static/home2.css">
+    <section>
+        <div class="home_content">
+            <div class="home_data">
+                <br>
+                <h1 class="head_cont">
+                    <b>Vedassist <img src="../static/images/icons8-medical-50.png" alt="medi" class="logoimg"></b>
+                    <br>
+                    <p class="home_description">
+                        Unlock the power of Ayurveda:<br>
+                        Predict your prefect remedy, revolutionize your well-being. 
+                    </p>
+                </h1>
+                <a href="{% url 'test' %}">
+                    <button class="btn3">Predictor→</button>
+                </a>
+                <a href="{% url 'test2' %}">
+                    <button class="btn3" style="margin-left: 50px;">Analyser→</button>
+                </a>
+                <br>
+                <hr style="color: transparent;"><hr style="color: transparent;">
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

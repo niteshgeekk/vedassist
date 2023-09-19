@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %} Shop {% endblock %}
+{% block start %}
+{% if user%}
+<link rel="stylesheet" href="../static/shop.css">
+<div class="mt-5" style="background-color: rgb(174, 255, 163); padding-top: 35px">
+    <div class="mx-auto col-6">
+      {% if messages %}
+        {{ message.tags }}
+
+        {% for message in messages %}
+          {% if message == 'Successful payment' %}
+            <div class="alert alert-success" role="alert">
+                {{message}}
+            </div>
+          {% else %}
+            <div class="alert alert-warning" role="alert">
+              {{message}}
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      <form> 
+        <div class="mb-3" style="display: flex; flex-direction: column">
+          <label for="exampleInputEmail1" class="form-label" style="position: relative; margin-top: 30px; font-weight: 700; font-size: 26px">Search Medicine</label>
+          <input name="search" type="text" class="inputbox" placeholder="Search by name / price / details">
+        </div>
+        <br>
+        <button type="submit" class="btn4">Search</button>
+      </form>
+  </div>
+  <hr>
+</div>
+<br>
+<div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+      <a href="?page=1"><button class="pre">&laquo;</button></a>
+      <a href="?page={{ page_obj.previous_page_number }}"><button class="pre">←</button></a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}"><button class="pre">→</button></a>
+      <a href="?page={{ page_obj.paginator.num_pages }}"><button class="pre">&raquo;</button></a>
+    {% endif %}
+  </span>
+</div>
+      <div class="card2" style="background-color: rgba(230, 227, 227, 0.79); padding-top: 30px; margin-left: 40px; margin-right: 40px; border-radius: 20px">
+      {% for medicine in medicines %}
+        <div class="card_con2">
+          <center><img src ="/media/{{medicine.medicine_image}}" style="height : 100px; margin-bottom: 5px;" ></center>
+          <h3>{{medicine.medicine_name}}</h3>
+          <p class="text" id="text{{medicine.id}}">{{medicine.medicine_description | slice:"0:100"}}<span class="moretext">{{medicine.medicine_description | slice:"100:"}}</span></p>
+          <p class="readmore" id="readmore{{medicine.id}}" onclick="expand({{medicine.id}})">Read More</p>
+            
+          <p>$ {{medicine.medicine_price}}</p>
+          <p>
+            <a href ="/buy-medicine/{{medicine.id}}/"><button class ="btn4">Buy</button></a> 
+          </p>
+          
+        </div>
+        
+
+      {% endfor %}
+      
+      </div>
+        <script>
+          function expand(id){
+            document.querySelector(`#text${id}`).classList.toggle('show_more');
+            if(document.querySelector(`#readmore${id}`).innerHTML === 'Read More'){
+            document.querySelector(`#readmore${id}`).innerHTML = 'Read Less';
+            }else{
+              document.querySelector(`#readmore${id}`).innerHTML = 'Read More';
+            }
+          }
+        </script>
+      
+
+</div>
+{% endif %}
+
+
+{% endblock %}
