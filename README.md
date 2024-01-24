@@ -3,3 +3,6 @@ Charaka Samhita, Sushruta Samhita, and others and symptom analysis. Built using 
 Forthe front end, we used HTML, CSS and for storing data SQLite and MySQL databases were used .
 
 ![image](https://github.com/niteshgeekk/vedassist/assets/123761994/b4dcc1fa-99de-4c74-94fc-0ac583def2e1)
+
+![image](https://github.com/niteshgeekk/vedassist/assets/123761994/65ac3a30-7322-48ff-a36e-7cc89a7122c2)
+
